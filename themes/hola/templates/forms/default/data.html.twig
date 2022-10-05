@@ -1,0 +1,15 @@
+<div>
+
+	<p> Hola {{ form.value.name|e }}, </p>
+
+	<p> Moltes gràcies per contactar amb nosaltres, et respondrem el més aviat possible. </p>
+
+	<p> Et deixem una còpia el teu missatge: </p>
+
+	{% include "forms/default/email.html.twig" %}
+
+	<br><br>
+	<a href="{{ uri.base}} "> {{ site.title}} </a>
+
+</div>
+

@@ -1,0 +1,9 @@
+{% if notes %}
+<div class="row narrow section-intro add-bottom text-center">
+    <div class="col-twelve tab-full">
+        <div class="alert-box alert-box--notice hideit">
+            <p>{{ notes|markdown }}</p>
+        </div> <!-- /notice -->
+    </div>
+</div>
+{% endif %}

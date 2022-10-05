@@ -1,0 +1,83 @@
+{% extends 'partials/base.html.twig' %}
+{% set shop_image = page.media.images[page.header.hero_image]?: page.media.images | first %}
+{% set collection = page.collection() %}
+{% set shop = page.find(header_var('shop_url')|defined(theme_var('shop-page'))) %}
+{% set show_pagination = header_var('show_pagination', [page, shop]) | defined(true) %}
+
+{% block body %}
+    {% for child in collection %}
+        {% if loop.first %}
+
+            <section class="page-header page-hero" style="background-image:url({{ child.media[child.header.hero_image].url() }})">
+
+                <div class="row page-header__content">
+                    <article class="col-full">
+
+                        <div class="page-header__info">
+                            <div class="page-header__cat">
+                                {% for category in child.taxonomy.category %}
+                                    <a href="{{ page.url(true) }}/category:{{ category }}">{{ category }}</a>
+                                {% endfor %}
+                            </div>
+                            <div class="page-header__date">
+                                {{ child.date|date("F d, Y") }}
+                            </div>
+                        </div>
+
+                        <h1 class="page-header__title">
+                            <a href="{{ child.url }}" title="">
+                                {{ child.title }}
+                            </a>
+                        </h1>
+                        <p>{{ child.content|slice(0, 150) }}...</p>
+                        <p>
+                            <a href="{{ child.url }}" class="btn btn--secundary page-header__btn">Read More</a>
+                        </p>
+                    </article>
+                </div>
+
+            </section> <!-- end highlighted-post -->
+
+        {% endif %}
+    {% endfor %}
+
+    <div class="shop-content-wrap">
+        <div class="row shop-content">
+            <div class="col-full">
+                <div class="shop-list block-1-2 block-tab-full">
+                    {% for child in collection %}
+                            <article class="col-block">
+
+                                <div class="shop-date">
+                                    <a href="{{ child.url }}">{{ child.date|date("F d, Y") }}</a>
+                                </div>
+
+                                <h2 class="h01">
+                                    <a href="{{ child.link }}">{{ child.title }}</a>
+                                </h2>
+                                <p>
+                                    {{ child.header.lead|slice (0.300) }}
+                                </p>
+
+                                <div class="shop-cat">
+                                    {% for category in child.header.taxonomy.category %}
+                                        <a href="{{ page.url(true) }}/category:{{ category }}">{{ category }}</a>
+                                    {% endfor %}
+
+                                </div>
+
+                            </article>
+                    {% endfor %}
+                </div>
+                {% if config.plugins.pagination.enabled and collection.params.pagination %}
+                    {% include 'partials/pagination.html.twig' with {
+                        'base_url' : page.url,
+                        'pagination' : collection.params.pagination
+                    } %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{# End Body Block #}

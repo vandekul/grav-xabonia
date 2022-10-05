@@ -1,0 +1,48 @@
+<footer>
+    <div class="row">
+        <div class="col-full">
+
+            <div class="footer-logo">
+                <a class="footer-site-logo" href="{{ base_url_relative }}">{% include 'partials/logo.html.twig' %}</a>
+            </div>
+
+            <!--ul class="footer-social">
+                {% for item in theme_var('footer-social') %}
+                    <li>
+                        <a href="{{ item.socialIconLink }}">
+                            <i class="{{ item.socialIconClass }}" aria-hidden="true"></i>
+                            <span>{{ item.socialIconText }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul-->
+        </div>
+    </div>
+
+    <div class="row footer-bottom">
+
+        <div class="col-twelve">
+            <div class="copyright">
+                <span>{{ theme_var('footer-text') }}</span>
+                <span>{{ theme_var('footer-design') }}</span>
+                <!--span>{{ theme_var('footer-additional-text') }}</span-->
+            </div>
+
+            <div class="copyright">
+                <span><a href="/avis">Aviso Legal</a></span>
+                <span><a href="/politica-privacidad">Política privacidad</a></span>
+                <span><a href="/cookies">Política de cookies</a></span>
+            </div>
+
+            <div class="go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top">
+                    <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+
+    </div> <!-- end footer-bottom -->
+
+    <!-- Please leave this as a credit.It's not visible. Thank you. -->
+    <a href="https://devlom.com" style="display: none;">Grav CMS Development by Devlom</a>
+</footer>

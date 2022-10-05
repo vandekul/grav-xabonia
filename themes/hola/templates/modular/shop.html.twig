@@ -1,0 +1,50 @@
+{% set shop_image = page.media.images[page.header.hero_image]?: page.media.images | first %}
+{% set collection = page.collection() %}
+{% set shop = page.find(header_var('shop_url')|defined(theme_var('shop-page'))) %}
+{% set show_pagination = header_var('show_pagination', [page, shop]) | defined(true) %}
+
+<!-- shop ================================================== -->
+<section id="{% if page.header.redirect %}{{ page.header.redirect }}{% else %}{{ page.menu|lower }}{% endif %}"
+         class="s-shop {{ page.header.sectionBackground }} target-section">
+
+    <div class="row narrow section-intro has-bottom-sep">
+        <div class="col-full">
+            <h3>{{ page.header.smallTitle }}</h3>
+            <h1>{{ page.title }}</h1>
+            <p class="lead">{{ page.content|striptags }}</p>
+        </div>
+    </div>
+
+ 
+    <div class="row collection">
+
+        {# LIST #}
+        <section id="list">
+            <div class="wrapper">
+            {% for item in collection %}
+                {% set image = item.header.image ? item.media[item.header.image] %}
+                {% set image_alt = item.header.image_alt %}
+                {% set title = item.header.name %}
+                {% set text = item.header.price ? item.header.price|number_format(2, ',', ' ') ~ '€' : item.header.date ? date.format(item.header.date) %}            
+                {% set url = item.url %}
+                {% include "partials/card.html.twig" with {
+                    product_id: item.header.product_id,
+                    notice: item.header.notice,
+                    disabled: item.header.disabled,
+                    image: image,
+                    image_alt: image_alt,
+                    price: item.header.price,
+                    weight: item.header.weight,
+                    title: title,
+                    text: text,
+                    url: url
+                }%}
+            {% endfor %}
+            {% include "partials/no-results.html.twig" with {condition: not(collection|length)} %}
+            {% include "partials/load-more.html.twig" with {pagination: collection.params.pagination} %}
+            </div>
+
+        </section>
+    </div>
+
+</section> <!-- end s-shop -->

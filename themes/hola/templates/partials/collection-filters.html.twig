@@ -1,0 +1,56 @@
+<section id="filters">
+    <form id="filter-form" onsubmit="event.preventDefault() & document.activeElement.blur()"            
+    hx-get="{{ page.url }}"
+    hx-replace-url="true" 
+    hx-trigger="change" 
+    hx-target="#list" 
+    hx-select="#list"
+    hx-indicator="#list">
+
+        {# RESET #}
+        <label for="reset-button">Reset
+            <input type="reset" value="" id="reset-button"
+            hx-get="{{ page.url }}"
+            hx-replace-url="true" 
+            hx-target="#list"
+            hx-trigger="click" 
+            hx-select="#list">
+            </input>
+        </label>
+
+        {# SEARCH #}
+        <label for="search-input">Search
+            <input type="search" name="search" id="search-input" list="search-list"/>
+        </label>
+
+        {# CATEGORY #}
+        <label for="category-select">Category
+            <select name="category" id="category-select">
+                <option value="">All</option> 
+                {% for t in taxonomy.getTaxonomyItemKeys('category') %}
+                <option value="{{ t }}">{{ t }}</option> 
+                {% endfor %}
+            </select>
+        </label>
+
+        {# TAG #}
+        <label for="tag-select">Tag
+            <select name="tag" id="tag-select">
+                <option value="">All</option> 
+                {% for t in taxonomy.getTaxonomyItemKeys('tag') %}
+                <option value="{{ t }}">{{ t }}</option> 
+                {% endfor %}
+            </select>            
+        </label>
+
+        {# SORT #}
+        <label for="sort-select">Sort
+            <select name="sort" id="sort-select">
+                <option value="">Default</option> 
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option> 
+            </select>            
+        </label>
+
+    </form>
+</section>

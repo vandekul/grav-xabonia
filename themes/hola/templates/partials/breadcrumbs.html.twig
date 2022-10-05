@@ -1,0 +1,65 @@
+{% macro html(page, pages, crumbs) %}
+{# USAGE - {{ breadcrumbs.html(page, pages, page.collection({items: {'@self.page': ''}})) }}  #}
+    {% import _self as breadcrumbs %}
+    {% set parent = page.collection({ items: {'@page.parent': page.url}}) %}
+    
+    {% if parent %}
+    {% set crumbs = crumbs.merge(parent) %}
+    {% for p in parent %}
+        {% set parent = p %}
+    {% endfor %}
+    {{ breadcrumbs.html(parent, pages, crumbs) }}
+
+    {% else %}
+    {% set crumbs = crumbs|reverse %}
+
+    <div class="breadcrumbs">
+        {% for crumb in crumbs %}
+        
+        {% if loop.index < loop.length %}
+        <a href="{{ crumb.url }}">{{ crumb.title }}</a>
+        {% endif %}
+        
+        {% if loop.index < loop.length - 1 %} / {% endif %} 
+        {% endfor %}            
+    </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro schema(page, pages, crumbs) %}
+    {# USAGE - {{ breadcrumbs.schema(page, pages, page.collection({items: {'@self.page': ''}})) }}  #}
+    {% import _self as breadcrumbs %}
+    {% set parent = page.collection({ items: {'@page.parent': page.url}}) %}
+    
+    {% if parent %}
+    {% set crumbs = crumbs.merge(parent) %}
+    
+    {% for p in parent %}
+        {% set parent = p %}
+    {% endfor %}
+    
+    {{ breadcrumbs.schema(parent, pages, crumbs) }}
+    
+    {% else %}
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+
+            {%- for crumb in crumbs|reverse -%}
+            {
+            "@type": "ListItem",
+            "position": {{ loop.index }},
+            "name": "{{ crumb.title }}",
+            "item": "{{ crumb.url(true) }}"
+            } 
+            {%- if not loop.last %},{% endif -%}
+            {%- endfor -%}
+            ]
+        }
+    </script>
+    {% endif %}
+{% endmacro %}
+
+

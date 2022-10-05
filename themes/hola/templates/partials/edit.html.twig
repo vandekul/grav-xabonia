@@ -1,0 +1,12 @@
+{% if grav.user.access.admin.login and theme.admin_edit_button %}
+    {% set adminPath = base_url ~ config.get('plugins.admin.route') ~ '/pages' %}
+    {% set pagePath -%}
+        {%- if page.url == home_url %}
+            {{- '/' ~ page.slug -}}
+        {% else %}
+            {{- page.url -}}
+        {% endif -%}
+    {% endset %}
+    {% set url = adminPath ~ pagePath %}
+    <a class="edit" href="{{ url }}" target="_blank" rel="nofollow">edit</a>
+{% endif %}

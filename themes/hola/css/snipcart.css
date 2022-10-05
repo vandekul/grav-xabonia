@@ -1,0 +1,26 @@
+.fa.fa-shopping-cart {
+    font-size: x-large;
+}
+.snipcart-summary .snipcart-total-items {
+    position: absolute;
+    background: #f5b674;
+    font-size: 12px;
+    display: block;
+    top: 12px;
+    right: -6px;
+    border-radius: 100%;
+    height: 16px;
+    width: 16px;
+    text-align: center;
+    line-height: 16px;
+    font-weight: bold;
+}
+
+.snipcart-checkout {
+    color:  white;
+}
+
+.snipcart-checkout:hover {
+    text-decoration: underline;
+    color:  white;
+}

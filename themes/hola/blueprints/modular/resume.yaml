@@ -1,0 +1,71 @@
+extends@: default
+
+form:
+  fields:
+    
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+        content:
+          type: tab
+          title: PLUGIN_ADMIN.CONTENT
+
+          fields:
+            header.smallTitle:
+              type: text
+              autofocus: true
+              style: vertical
+              label: Small Upper Title
+        
+        holaSetings:
+          type: tab
+          title: Hola Settings
+
+          fields:
+            background:
+              type: section
+              title: Section Background Color
+              underline: true
+            header.sectionBackground:
+              type: selectize
+              label: Additional Section Background Class
+              description: For Gray Background Please Use Class 'grey-section' for White Background leave field empty. 
+
+            timelineSection:
+              type: section
+              title: Resume Timeline
+              text: 'Icon Bank: https://fontawesome.com/v4.7.0/icons/'
+              underline: true
+
+            header.timeline:
+              type: list
+              label: Timeline Section
+              style: vertical
+              fields:
+                .resumeTitle:
+                  type: text
+                  label: Resume Section Title
+                .timelineItems:
+                  type: list
+                  label: Timeline Items
+                  fields:    
+                    .position:
+                      type: text
+                      label: Position
+                    .date:
+                      type: text
+                      label: Date
+                    .icon_class:
+                      type: iconpicker
+                      label: Icon Class
+                    .title:
+                      type: text
+                      label: Item
+                    .descripiton:
+                      type: textarea
+                      label: Description
+                  
+
+                

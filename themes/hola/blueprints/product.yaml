@@ -1,0 +1,135 @@
+extends@: default
+
+form:
+  fields:
+    
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+        productSettings:
+          title: Product Settings
+          type: tab
+          fields:
+            header.name:
+              type: text
+              label: Product Name
+              style: horitzontal
+              validate:
+                required: true
+            header.product_id:
+              type: text
+              label: ID producte
+              style: horitzontal
+              validate:
+                required: true
+            header.weight:
+              type: number
+              label: Weight
+              style: horitzontal
+              validate:
+                required: true
+            header.price:
+              type: number
+              label: Price
+              style: horitzontal
+              validate:
+                required: true
+            header.taxable:
+              type: toggle
+              label: Taxable
+              highlight: 1
+              default: 1
+              options:
+                  1: 'True'
+                  0: 'False'
+              validate:
+                  type: bool
+            header.shippable:
+              type: toggle
+              label: Shippable
+              style: horitzontal
+              default: 1
+              highlight: 1
+              options:
+                1: 'True'
+                0: 'False'
+              validate:
+                type: bool
+            header.disabled:
+              type: toggle
+              label: Product Disable
+              help: Deshabilitar el producto para no poder acceder al detalle 
+              style: horitzontal
+              default: 0
+              highlight: 1
+              options:
+                1: 'True'
+                0: 'False'
+              validate:
+                type: bool
+            header.notice:
+              type: text
+              label: Etiqueta para la foto de la tienda
+              help: Ejemplo 'Próximamente'
+              style: horitzontal
+            header.paso1:
+              type: text
+              label: Fase sólida
+              help: Paso 1 en las instrucciones (SCI, Arcilla,...)
+              style: horitzontal
+            header.paso2:
+              type: text
+              label: Fase olea
+              help: Paso 2 en las instrucciones (Aceite Jojoba, Aceite Caléndula, ...)
+              style: horitzontal
+            header.paso3:
+              type: text
+              label: Fase acuosa
+              help: Paso 3 en las instrucciones (Aloe-Vera)
+              style: horitzontal
+            header.image:
+              type: filepicker
+              label: Photo portada
+              help: Puja primer les fotos a la pestanya de 'Content'
+              folder: 'self@'
+              preview_images: true
+              accept:
+                - .png
+                - .jpg
+                - .jpeg
+            header.lead:
+              type: markdown
+              autofocus: true
+              style: horitzontal
+              label: Lead product
+            content:
+              label: Content 
+              type: markdown
+              validate:
+                type: textarea
+            header.included:
+              type: markdown
+              autofocus: true
+              label: Material Included
+            header.notIncluded:
+              type: markdown
+              autofocus: true
+              label: Material NOT Included
+            header.notes:
+              type: markdown
+              autofocus: true
+              style: hortizontal
+              label: Notes
+            header.items:
+              label: FAQs
+              type: list
+              style: vertical
+              fields:
+                .title:
+                  type: text
+                  label: Pregunta
+                .content:
+                  type: textarea
+                  label: Resposta

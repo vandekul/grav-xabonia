@@ -1,0 +1,46 @@
+{% import "partials/date.html.twig" as date %}
+{% extends 'partials/base.html.twig' %}
+
+{% set category = uri.query('category') %}
+{% set tag = uri.query('tag') %}
+{% set sort = uri.query('sort') %}
+{% set search = uri.query('search') %}
+{% set collection = page.children %}
+{% set search_collection = page.collection({ items: {'self@.page':''} }) %}
+{% do search_collection.remove(page.path) %}
+{% if search %}
+    {% for item in collection %}
+        {% if search|trim|lower in item.title|trim|lower %}
+            {% do search_collection.addPage(item) %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+{% set collection = search ? search_collection : collection %}
+{% if category %}{% do collection.intersect(taxonomy.findTaxonomy({'category':category})) %}{% endif %}
+{% if tag %}{% do collection.intersect(taxonomy.findTaxonomy({'tag':tag})) %}{% endif %}
+{% if sort == 'newest' %}{% do collection.order('date', 'desc') %}
+{% elseif sort == 'oldest' %}{% do collection.order('date', 'asc') %}
+{% else %}{% do collection.order('folder', 'asc') %}{% endif %}
+{% do paginate(collection, 6) %}
+
+{% block content %}
+
+    <section class="small-page-header page-hero" style="background-image:url({{ url('theme://images/default.jpg') }}">
+        <div class="row page-header__content narrow text-center">
+            <h1 class="page-header__title">
+                {{ page.title }}
+            </h1>
+        </div>
+    </section>
+
+<div class="collection">
+    {# LIST #}
+     {% include "modular/shop.html.twig" %}
+</div>
+
+    {# MODULES #}
+    {% for module in page.collection({ items: {'@self.modular':''}, 'order': {'by':'folder', 'dir':'asc'}}) %}
+    {{ module.content|raw }}
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,60 @@
+extends@: default
+
+form:
+  fields:
+    
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+        content:
+          type: tab
+          title: PLUGIN_ADMIN.CONTENT
+
+          fields:
+            header.smallTitle:
+              type: text
+              autofocus: true
+              style: vertical
+              label: Small Upper Title
+
+        holaSetings:
+          type: tab
+          title: Hola Settings
+
+          fields:
+            background:
+              type: section
+              title: Section Background Color
+              underline: true
+            header.sectionBackground:
+              type: selectize
+              label: Additional Section Background Class
+              description: For Gray Background Please Use Class 'grey-section' for White Background leave field empty. 
+            experience:
+              type: section
+              title: Experience
+              underline: true
+              fields:
+                header.expTitle:
+                  type: text
+                  style: vertical
+                  label: Experience Title
+                header.experienceTimeline:
+                  type: list
+                  label: Timeline
+                  style: vertical
+                  fields:
+                    .date:
+                      type: text
+                      label: Date
+                    .client:
+                      type: text
+                      label: Client Name
+                    .position:
+                      type: text
+                      label: Position 
+                    .description:
+                      type: textarea
+                      label: Job Description

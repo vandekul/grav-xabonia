@@ -1,0 +1,28 @@
+{% extends 'modular/module.html.twig' %}
+{% set el = 'wht-details' %}
+
+{% set display_title = display_title ?? page.header.display_title ?? null %}
+{% set items = items ?? page.header.items ?? null %}
+
+{% block content %}
+<details-wrapper>
+
+	{% if display_title %}
+	<div class="module__title text">
+		<h2>{{ display_title|raw }}</h2>
+	</div>
+	{% endif %}
+    
+    <details-layout>
+        {% for item in items %}
+            {% set title = item.title %}
+            {% set content = item.content %}
+            <details>
+                <summary><h4>{{ title }}</h4></summary>
+                <div class="content text prose">{{ content|markdown }}</div>
+            </details>
+        {% endfor %}        
+    </details-layout>
+
+</details-wrapper>
+{% endblock %}

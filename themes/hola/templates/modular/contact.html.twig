@@ -1,0 +1,65 @@
+<section id="{% if page.header.redirect %}{{ page.header.redirect }}{% else %}{{ page.menu|lower }}{% endif %}"
+	 class="s-contact page-hero target-section" data-parallax="scroll" data-image-src="{{ page.media[page.header.background].url() }}" data-position-y="center">
+
+    <div class="overlay" style="opacity:{{ page.header.opacity }};"></div>
+
+    <div class="row narrow section-intro">
+        <div class="col-full">
+            <h3>{{ page.header.smallTitle }}</h3>
+            <h1>{{ page.title }}</h1>
+            
+
+            <p class="lead">{{ page.content|striptags }}</p>
+        </div>
+    </div>
+
+    <div class="row contact__main">
+        <div class="col-full tab-full contact__form">
+            {% include "forms/form.html.twig" %}
+            <!-- contact-warning -->
+            <div class="message-warning">
+                Something went wrong. Please try again.
+            </div>
+
+            <!-- contact-success -->
+            <div class="message-success">
+                Your message was sent, thank you!<br>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var form = $('.contact__main form');
+            form.submit(function (e) {
+                // prevent form submission
+                e.preventDefault();
+                // submit the form via Ajax
+                $.ajax({
+                    url: form.attr('action'),
+                    type: form.attr('method'),
+                    dataType: 'html',
+                    data: form.serialize(),
+                    success: function (result) {
+                        // Inject the result in the HTML
+                        $('.message-success').show();
+                        $('.message-success').html(result);
+                    }
+                });
+            });
+        });
+    </script>
+    {% if page.header.social %}
+        <ul class="home-social">
+            {% for icon in page.header.social %}
+                <li>
+                    <a href="{{ icon.socialIconLink }}">
+                        <i class="{{ icon.socialIconClass }}" aria-hidden="true"></i>
+                        <span>{{ icon.socialIconText }}</span></a>
+                </li>
+            {% endfor %}
+        </ul> <!-- end home-social -->
+    {% endif %}
+</section>
+<!-- end s-contact -->

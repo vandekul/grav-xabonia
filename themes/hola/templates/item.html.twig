@@ -1,0 +1,79 @@
+{% extends 'partials/base.html.twig' %}
+{% block content %}
+
+    <article class="blog-single">
+
+        <!-- page header/blog hero ================================================== -->
+        <div class="page-header page-header--single page-hero" style="    background-size: cover;background-image:url({{ page.media[page.header.hero_image].url() }})">
+
+            <div class="row page-header__content narrow">
+                <article class="col-full">
+                    <div class="page-header__info">
+                        <div class="page-header__cat">
+                            {% for category in page.header.taxonomy.category %}
+                                <a href="{{ page.url(true) }}/category:{{ category }}">{{ category }}</a>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                    <h1 class="page-header__title">
+                        <a href="{{ page.url }}" title="">
+                            {{ page.title }}
+                        </a>
+                    </h1>
+                    <ul class="page-header__meta">
+                         <li class="author">
+                            <span>
+                                {{ page.header.subtitle }}
+                            </span>
+                        </li>
+                    </ul>
+                    <!--ul class="page-header__meta">
+                        <li class="date">{{ page.date|date("F d, Y") }}</li>
+                        <li class="author">
+                            By
+                            <span>
+                                {% for author in page.header.taxonomy.author %}
+                                    {{ author }}
+                                {% endfor %}
+                            </span>
+                        </li>
+                    </ul-->
+
+                </article>
+            </div>
+
+        </div> <!-- end page-header -->
+
+        <div class="row blog-content">
+            <div class="col-full blog-content__main">
+
+                <p class="lead">{{ page.header.lead }}</p>
+
+                {{ page.content }}
+
+
+                <div class="blog-content__pagenav">
+                    <div class="blog-content__nav">
+                        <p class="blog-content__tags">
+                             <span class="blog-content__tag-list">
+                                {% for category in page.header.taxonomy.category %}
+                                    <a href="{{ page.parent.url(true) }}/category:{{ category }}">{{ category }}</a>
+                                {% endfor %}
+                            </span>
+                        </p>
+                    </div>
+
+                    <div class="blog-content__all">
+                        <a href="{{ page.parent.url() }}" class="btn btn--primary">
+                            Ver todo
+                        </a>
+                    </div>
+                </div>
+
+            </div> <!-- end blog-content__main -->
+        </div> <!-- end blog-content -->
+
+    </article>
+
+{% endblock %}
