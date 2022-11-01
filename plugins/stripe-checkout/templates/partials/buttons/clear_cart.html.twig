@@ -1,0 +1,14 @@
+{#
+This partial is the most basic setup for a add to cart button that the plugin requires.
+Simply create an <a> or any other element that you want,
+with the data-clear-cart
+
+Example: add this to your product templates:
+{% include 'partials/buttons/clear_cart.html.twig' %}
+#}
+
+<button class="btn button btn--primary" data-clear-cart>
+	{{ 'THEME.PRODUCT.CLEARCART'|t }}
+</button>
+
+{#<a href="" data-clear-cart>Clear Cart</a>#}

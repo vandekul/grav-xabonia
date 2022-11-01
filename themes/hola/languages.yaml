@@ -8,6 +8,8 @@ en:
       RELATED: In the same collection
       DISABLED: Cart is disabled
       ADD: Add to cart
+      CLEARCART: Empty the cart
+      CHECKOUT: Checkout Now
       INSTRUCTION: Product availability and discount will be confirmed during the checkout process.
   BLOG:
     ITEM:
@@ -86,6 +88,8 @@ es:
       RELATED: Producto relacionado
       DISABLED: No disponible
       ADD: Añadir al carrito
+      CLEARCART: Vaciar Carrito
+      CHECKOUT: Pagar Ahora
       INSTRUCTION: La disponibilidad del producto así cómo la aplicación de descuentos se realizarán durante el proceso de pago.
   SHOP:
     ITEM:

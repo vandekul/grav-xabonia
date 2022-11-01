@@ -13,16 +13,10 @@
 					{% if text %}<p>{{ text }}{% endif %} </p>
 				</div>
 		        <div class="col-two col-right">
-
-		            <div class="fa fa-shopping-cart snipcart-add-item"
-		                  data-item-id= "{{ product_id }}"
-		                  data-item-price= "{{ text }}"
-		                  data-item-weight= "{{ weight }}"
-		                  data-item-image= "{{ image.url|e }}"
-		                  data-item-name= "{{ title }}"
-		                  data-item-url="{{ url }}" >
+		            <div class="fa fa-shopping-cart" 
+		            	data-add-to-cart="{{ sku }}"
+		            	data-add-to-cart-extras="{{ {url: url, image: image.url|e, price: price }|json_encode|e('html_attr') }}" >
 		            </div>
-		            
 		        </div>
 	        {% endif %}
 		</div>

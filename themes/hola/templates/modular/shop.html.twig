@@ -37,7 +37,8 @@
                     weight: item.header.weight,
                     title: title,
                     text: text,
-                    url: url
+                    url: url,
+                    sku: item.header.sku
                 }%}
             {% endfor %}
             {% include "partials/no-results.html.twig" with {condition: not(collection|length)} %}

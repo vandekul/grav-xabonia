@@ -1,0 +1,60 @@
+{% extends 'partials/base.html.twig' %}
+
+{% do assets.addJs('plugin://stripe-checkout/js/example.js') %}
+{% block content %}
+    <section class="small-page-header page-hero" style="background-image:url({{ url('theme://images/default.jpg') }}">
+        <div class="row page-header__content narrow text-center">
+            <h1 class="page-header__title">
+                {{ page.title }}
+            </h1>
+        </div>
+    </section>
+    <section id="default" class="s-default">
+        <div class="row">
+            <div class="col-full">
+               <div>
+                    {{ page.content|raw }}
+
+                    {% if uri.query('result') is same as('success') %}
+                        <h3>Order Successfully Completed. Thank you for your custom. You will receive an email receipt shortly after your payment has been processed.</h3>
+                    {% elseif uri.query('result') is same as('canceled') %}
+                        <h3>Order Canceled. Please try again or contact our customer support to verify the issue you may be having. Thank you for your patience.</h3>
+                    {% endif %}
+
+                    <div id="cart-example" data-cart-items>
+                        <div class="row columns" data-cart-item>
+                            <div class="column col-2 col-sm-6 img-thumbail"><img src="" alt="" data-item-image/></div>
+                            <div class="column col-sm-6" data-item-name></div>
+
+                            {% if not uri.query('result') is same as('success') %}
+                                <div class="column col-1" data-item-minus>{% include 'partials/buttons/decrease_quantity.html.twig' %}</div>
+                            {% endif %}
+
+                            <div class="column col-1" data-item-quantity></div>
+
+                            {% if not uri.query('result') is same as('success') %}
+
+                                <div class="column col-1" data-item-plus>{% include 'partials/buttons/increase_quantity.html.twig' %}</div>
+                                
+                            {% endif %}
+
+                            <div class="column col-1" data-item-price></div>
+
+                            {% if not uri.query('result') is same as('success') %}
+                                <div class="column col-1" data-item-delete>{% include 'partials/buttons/remove_from_cart.html.twig' %}</div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+                    {% if not uri.query('result') is same as('success') %}
+                        {% include 'partials/buttons/checkout.html.twig' %}
+                        {% include 'partials/buttons/clear_cart.html.twig' %}
+                    {% else %}
+                        Error en la connexió
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

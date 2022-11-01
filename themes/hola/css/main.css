@@ -5107,3 +5107,10 @@ font-size: 14px;
         display: none;
     }
 }
+
+
+/*--------------------------------*/
+
+.img-thumbail{
+    max-width: 15%;
+}

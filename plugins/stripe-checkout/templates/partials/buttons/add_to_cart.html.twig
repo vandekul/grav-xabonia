@@ -1,0 +1,19 @@
+{#
+This partial is the most basic setup for a add to cart button that the plugin requires.
+Simply create an <a> or any other element that you want,
+with the data-add-to-cart="insert your stripe sku here"
+
+Options:
+data-add-to-cart-quantity="2" Optional param to add X amount to cart
+data-add-to-cart-extras="{{ {url: page.url, image: page.media.images|first.url, value_another: 'test' }|json_encode|e('html_attr') }}"
+
+Example: add this to your product templates:
+{% include 'partials/buttons/add_to_cart.html.twig' with {sku: page.header.sku} %}
+#}
+
+<button class="btn button btn--primary" data-add-to-cart="{{ sku }}" data-add-to-cart-extras="{{ {url: page.url, image: page.media.images|first.url, price: page.header.price }|json_encode|e('html_attr') }}"
+>
+	{{ 'THEME.PRODUCT.ADD'|t }}
+</button>
+
+{#<a href="" data-add-to-cart="{{ sku }}">Add to Cart</a>#}

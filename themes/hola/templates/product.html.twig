@@ -93,7 +93,7 @@
 					<div class="price"> {{ page.header.price }} €</div>
 
 					{# ADD TO CART #}
-					{% if theme.snipcart %}
+					<!--{% if theme.snipcart %}
 					<a href="#" class="btn button btn--primary snipcart-add-item"
 						data-item-id="{{ page.header.product_id }}"
 						data-item-price="{{ page.header.price }}"
@@ -132,7 +132,9 @@
 							 {{ 'THEME.PRODUCT.ADD'|t }}</a>
 						{% else %}
 						<div class="btn button btn--primary disabled snipcart-add-item">{{ 'THEME.PRODUCT.DISABLED'|t }}</div>
-					{% endif %}
+					{% endif %}-->
+
+					{% include 'partials/buttons/add_to_cart.html.twig' with {sku: page.header.sku} %}
 
 					{# CART INSTRUCTIONS #}
 					<div class="instruction text small prose">

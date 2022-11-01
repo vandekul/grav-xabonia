@@ -2,3 +2,6 @@
 !/user/data/.*
 /user/accounts/*
 !/user/accounts/.*
+/user/config/*.yaml
+!/user/config/.*
+
